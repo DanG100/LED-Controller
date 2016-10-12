@@ -13,7 +13,7 @@ deploy:
   provider: GitHub
   auth_token:
     secure: VtuiEw6NXRRYgPkzk+EHYxBu4T5I+7hATgUnMYvA5zR0CnywuDF/gUp0sfxXv+Vx # your encrypted token from GitHub
-  artifact: led-controller/release/LED-Controller.exe
+  artifact: 'C:/projects/led-controller/release/LED-Controller.exe'
   draft: true
   prerelease: true
   on:
