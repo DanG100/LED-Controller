@@ -8,12 +8,12 @@ build_script:
   - mingw32-make
 
 deploy:
-  release: LEDController-v$(APPVEYOR_REPO_TAG_NAME)
+  release: LEDController-$(APPVEYOR_REPO_TAG_NAME)
   description: 'Auto-generated release'
   provider: GitHub
   auth_token:
     secure: VtuiEw6NXRRYgPkzk+EHYxBu4T5I+7hATgUnMYvA5zR0CnywuDF/gUp0sfxXv+Vx # your encrypted token from GitHub
-  artifact: /release/LED-Controller.exe
+  artifact: led-controller/release/LED-Controller.exe
   draft: true
   prerelease: true
   on:
