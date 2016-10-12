@@ -6,14 +6,18 @@ init:
 build_script:
   - qmake LED-Controller.pro
   - mingw32-make
+  
+artifacts:
 
+  - path: .\release\LED-Controller.exe
+  
 deploy:
   release: LEDController-$(APPVEYOR_REPO_TAG_NAME)
   description: 'Auto-generated release'
   provider: GitHub
   auth_token:
     secure: VtuiEw6NXRRYgPkzk+EHYxBu4T5I+7hATgUnMYvA5zR0CnywuDF/gUp0sfxXv+Vx # your encrypted token from GitHub
-  artifact: 'C:/projects/led-controller/release/LED-Controller.exe'
+  artifact: .\release\LED-Controller.exe
   draft: true
   prerelease: true
   on:
