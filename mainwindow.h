@@ -5,6 +5,7 @@
 #include <QSerialPort>
 #include <QDebug>
 #include <QThread>
+#include "serialcomm.h"
 
 namespace Ui {
 class MainWindow;
@@ -18,9 +19,15 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+private slots:
+    void on_actionConnect_triggered();
+
+    void on_actionDisconnect_triggered();
+
 private:
     Ui::MainWindow *ui;
     QSerialPort serial;
+    SerialComm comm;
 };
 
 #endif // MAINWINDOW_H
