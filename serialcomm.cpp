@@ -55,14 +55,14 @@ SerialError SerialComm::write(QByteArray msg)
     return SE_SUCCESS;
 }
 
-SerialError SerialComm::read(QByteArray *msg)
+SerialError SerialComm::read(QByteArray &msg)
 {
     char data[1024] = {0};
     this->serialPort.waitForReadyRead(1000);
     int ret = this->serialPort.readLine(data,1024);
     if(ret == 0 || ret == -1)//TODO: handle partial reads
         return SE_ERROR_READ;
-    *msg = QByteArray(data);
+    msg = QByteArray(data);
     return SE_SUCCESS;
 }
 

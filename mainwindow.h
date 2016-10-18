@@ -26,7 +26,6 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    QSerialPort serial;
     SerialComm comm;
 };
 

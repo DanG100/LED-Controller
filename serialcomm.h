@@ -24,7 +24,7 @@ public:
     ~SerialComm();
     SerialError connectToArduino();
     SerialError write(QByteArray msg);
-    SerialError read(QByteArray *msg);
+    SerialError read(QByteArray &msg);
     void disconnectFromArduino();
 private:
     QSerialPort serialPort;
