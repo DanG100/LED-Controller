@@ -6,6 +6,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    connect(&comm,SIGNAL(connected(QString, QString, QString, QString)),this,SLOT(updateConnectInfo(QString, QString, QString, QString)));
 }
 
 MainWindow::~MainWindow()
@@ -21,4 +22,14 @@ void MainWindow::on_actionConnect_triggered()
 void MainWindow::on_actionDisconnect_triggered()
 {
     this->comm.disconnectFromArduino();
+    this->ui->statusText->setText("Disconnected");
+}
+
+void MainWindow::updateConnectInfo(QString port, QString baudRate, QString manufacturer, QString description)
+{
+    this->ui->statusText->setText("Connected");
+    this->ui->portText->setText(port);
+    this->ui->baudText->setText(baudRate);
+    this->ui->manufactText->setText(manufacturer);
+    this->ui->descText->setText(description);
 }

@@ -42,6 +42,7 @@ SerialError SerialComm::connectToArduino()
         qDebug() << "Open error";
         return SE_ERROR_OPEN;
     }
+    emit connected(portToUse.portName(),QString::number(9600),portToUse.manufacturer(),portToUse.description());//TODO: fix static baudrate
     return SE_SUCCESS;
 }
 
