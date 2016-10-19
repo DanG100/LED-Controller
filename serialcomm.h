@@ -17,8 +17,9 @@ typedef enum SerialError
 
 }SerialError;
 
-class SerialComm
+class SerialComm : public QObject
 {
+    Q_OBJECT
 public:
     SerialComm();
     ~SerialComm();
@@ -28,6 +29,9 @@ public:
     void disconnectFromArduino();
 private:
     QSerialPort serialPort;
+signals:
+    void connected(QString port, QString baudRate, QString manufacturer, QString description);
+
 };
 
 #endif // SERIALCOMM_H
