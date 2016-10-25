@@ -28,8 +28,8 @@ private slots:
 
 public slots:
     void updateUiConnectInfo(QString port, QString baudRate, QString manufacturer, QString description);
-    void updatUISent(QByteArray msg);
-    void updateUIReceived(QByteArray msg);
+    void updatUISent(QString msg);
+    void updateUIReceived(QString msg);
 private:
     Ui::MainWindow *ui;
     SerialComm comm;

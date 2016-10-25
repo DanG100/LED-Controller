@@ -47,10 +47,11 @@ SerialError SerialComm::connectToArduino()
     return SE_SUCCESS;
 }
 
-SerialError SerialComm::write(QByteArray msg)
+SerialError SerialComm::write(QString msg)
 {
-    int ret = this->serialPort.write(msg);
-    if(ret != msg.length() || ret == -1)
+    QByteArray packet = createPacket(msg);
+    int ret = this->serialPort.write(packet);
+    if(ret != packet.length() || ret == -1)
         return SE_ERROR_WRITE;
     this->serialPort.flush();
     this->serialPort.waitForBytesWritten(1000);
@@ -62,10 +63,11 @@ SerialError SerialComm::read()
 {
     char data[1024] = {0};
     int ret = this->serialPort.readLine(data,1024);
+
     if(ret == 0 || ret == -1)//TODO: handle partial reads
         return SE_ERROR_READ;
-    QByteArray msg = QByteArray(data);
-    qDebug() << msg;
+    QString msg;
+    getMsgFromPacket(data,msg);
     emit receivedMsg(msg);
     return SE_SUCCESS;
 }
@@ -73,7 +75,33 @@ SerialError SerialComm::read()
 void SerialComm::disconnectFromArduino()
 {
     this->serialPort.close();
+    disconnect(&serialPort,SIGNAL(readyRead()),this,SLOT(read()));
 }
+
+QByteArray SerialComm::createPacket(QString msg)
+{
+    QByteArray packet = msg.toUtf8();
+    packet.prepend("!0:");packet.append("\n");
+    packet[1] = (char) packet.length();
+    return packet;
+}
+
+SerialError SerialComm::getMsgFromPacket(QByteArray packet, QString &msg)
+{
+    if(packet.isEmpty() || packet.isNull())
+        return SE_ERROR_INVALID_PACKET;
+    msg = QString("Error");
+    if(packet.at(0)!='!' || packet.at(packet.length()-1) != '\n')
+        return SE_ERROR_INVALID_PACKET;
+    if(packet.at(1)!=packet.length())
+        return SE_ERROR_INVALID_PACKET;
+    msg = QString(packet);
+    msg = msg.mid(msg.indexOf(':')+1);
+    msg = msg.left(msg.length()-1);
+    return SE_SUCCESS;
+}
+
+
 
 
 

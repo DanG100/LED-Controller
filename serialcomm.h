@@ -13,6 +13,7 @@ typedef enum SerialError
     SE_ERROR_CLOSE=3,
     SE_ERROR_READ =4,
     SE_ERROR_WRITE=5,
+    SE_ERROR_INVALID_PACKET=6,
     SE_SUCCESS=0
 
 }SerialError;
@@ -24,17 +25,19 @@ public:
     SerialComm();
     ~SerialComm();
     SerialError connectToArduino();
-    SerialError write(QByteArray msg);
+    SerialError write(QString msg);
 
     void disconnectFromArduino();
 private:
     QSerialPort serialPort;
+    QByteArray createPacket(QString msg);
+    SerialError getMsgFromPacket(QByteArray packet, QString &msg);
 private slots:
     SerialError read();
 signals:
     void connected(QString port, QString baudRate, QString manufacturer, QString description);
-    void sentMsg(QByteArray msg);
-    void receivedMsg(QByteArray msg);
+    void sentMsg(QString msg);
+    void receivedMsg(QString msg);
 
 };
 
