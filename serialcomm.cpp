@@ -43,6 +43,7 @@ SerialError SerialComm::connectToArduino()
         return SE_ERROR_OPEN;
     }
     emit connected(portToUse.portName(),QString::number(9600),portToUse.manufacturer(),portToUse.description());//TODO: fix static baudrate
+    connect(&serialPort,SIGNAL(readyRead()),this,SLOT(read()));
     return SE_SUCCESS;
 }
 
@@ -53,17 +54,19 @@ SerialError SerialComm::write(QByteArray msg)
         return SE_ERROR_WRITE;
     this->serialPort.flush();
     this->serialPort.waitForBytesWritten(1000);
+    emit sentMsg(msg);
     return SE_SUCCESS;
 }
 
-SerialError SerialComm::read(QByteArray &msg)
+SerialError SerialComm::read()
 {
     char data[1024] = {0};
-    this->serialPort.waitForReadyRead(1000);
     int ret = this->serialPort.readLine(data,1024);
     if(ret == 0 || ret == -1)//TODO: handle partial reads
         return SE_ERROR_READ;
-    msg = QByteArray(data);
+    QByteArray msg = QByteArray(data);
+    qDebug() << msg;
+    emit receivedMsg(msg);
     return SE_SUCCESS;
 }
 

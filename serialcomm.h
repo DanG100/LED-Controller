@@ -25,12 +25,16 @@ public:
     ~SerialComm();
     SerialError connectToArduino();
     SerialError write(QByteArray msg);
-    SerialError read(QByteArray &msg);
+
     void disconnectFromArduino();
 private:
     QSerialPort serialPort;
+private slots:
+    SerialError read();
 signals:
     void connected(QString port, QString baudRate, QString manufacturer, QString description);
+    void sentMsg(QByteArray msg);
+    void receivedMsg(QByteArray msg);
 
 };
 

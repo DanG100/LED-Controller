@@ -22,8 +22,14 @@ public:
 private slots:
     void on_actionConnect_triggered();
     void on_actionDisconnect_triggered();
+    void on_sendButton_clicked();
+
+    void on_sendField_returnPressed();
+
 public slots:
-    void updateConnectInfo(QString port, QString baudRate, QString manufacturer, QString description);
+    void updateUiConnectInfo(QString port, QString baudRate, QString manufacturer, QString description);
+    void updatUISent(QByteArray msg);
+    void updateUIReceived(QByteArray msg);
 private:
     Ui::MainWindow *ui;
     SerialComm comm;

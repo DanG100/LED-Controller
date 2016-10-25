@@ -18,7 +18,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -180,10 +180,6 @@
          </item>
         </layout>
        </widget>
-       <zorder>connectInfoLabel</zorder>
-       <zorder>gridLayoutWidget</zorder>
-       <zorder>gridLayoutWidget_2</zorder>
-       <zorder>controlModeLabel</zorder>
       </widget>
       <widget class="QWidget" name="tab_2">
        <attribute name="title">
@@ -193,14 +189,28 @@
         <item>
          <layout class="QVBoxLayout" name="verticalLayout">
           <item alignment="Qt::AlignHCenter">
-           <widget class="QLabel" name="label">
+           <widget class="QLabel" name="logLabel">
             <property name="text">
              <string>Communication Log</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QTextBrowser" name="textBrowser"/>
+           <widget class="QTextBrowser" name="logView"/>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_4">
+            <item>
+             <widget class="QLineEdit" name="sendField"/>
+            </item>
+            <item>
+             <widget class="QPushButton" name="sendButton">
+              <property name="text">
+               <string>Send</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </item>
          </layout>
         </item>
