@@ -2,11 +2,14 @@
 
 SerialComm::SerialComm()
 {
-
+    this->serialDelayTimer.setSingleShot(true);
+    connect(&serialPort,SIGNAL(readyRead()),this,SLOT(delayRead()));
+    connect(&serialDelayTimer,SIGNAL(timeout()),this,SLOT(read()));
 }
 SerialComm::~SerialComm()
 {
-
+  disconnect(&serialPort,SIGNAL(readyRead()),this,SLOT(delayRead()));
+  disconnect(&serialDelayTimer,SIGNAL(timeout()),this,SLOT(read()));
 }
 
 SerialError SerialComm::connectToArduino()
@@ -25,7 +28,7 @@ SerialError SerialComm::connectToArduino()
     }
     this->serialPort.setPort(portToUse);
 
-    this->serialPort.setBaudRate(QSerialPort::Baud9600);
+    this->serialPort.setBaudRate(QSerialPort::Baud115200);
     this->serialPort.setDataBits(QSerialPort::Data8);
     this->serialPort.setParity(QSerialPort::NoParity);
     this->serialPort.setStopBits(QSerialPort::OneStop);
@@ -42,8 +45,8 @@ SerialError SerialComm::connectToArduino()
         qDebug() << "Open error";
         return SE_ERROR_OPEN;
     }
-    emit connected(portToUse.portName(),QString::number(9600),portToUse.manufacturer(),portToUse.description());//TODO: fix static baudrate
-    connect(&serialPort,SIGNAL(readyRead()),this,SLOT(read()));
+    emit connected(portToUse.portName(),QString::number(115200),portToUse.manufacturer(),portToUse.description());//TODO: fix static baudrate
+
     return SE_SUCCESS;
 }
 
@@ -63,7 +66,6 @@ SerialError SerialComm::read()
 {
     char data[1024] = {0};
     int ret = this->serialPort.readLine(data,1024);
-
     if(ret == 0 || ret == -1)//TODO: handle partial reads
         return SE_ERROR_READ;
     QString msg;
@@ -101,7 +103,11 @@ SerialError SerialComm::getMsgFromPacket(QByteArray packet, QString &msg)
     return SE_SUCCESS;
 }
 
-
-
-
+void SerialComm::delayRead()
+{
+    if(!this->serialDelayTimer.isActive())
+    {
+        serialDelayTimer.start(2000);
+    }
+}
 
