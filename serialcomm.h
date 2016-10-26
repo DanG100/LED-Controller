@@ -5,6 +5,7 @@
 #include <QSerialPort>
 #include <QSerialPortInfo>
 #include <QDebug>
+#include <QTimer>
 
 typedef enum SerialError
 {
@@ -32,8 +33,10 @@ private:
     QSerialPort serialPort;
     QByteArray createPacket(QString msg);
     SerialError getMsgFromPacket(QByteArray packet, QString &msg);
+    QTimer serialDelayTimer;
 private slots:
     SerialError read();
+    void delayRead();
 signals:
     void connected(QString port, QString baudRate, QString manufacturer, QString description);
     void sentMsg(QString msg);
