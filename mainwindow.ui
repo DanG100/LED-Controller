@@ -34,13 +34,6 @@
          </rect>
         </property>
         <layout class="QGridLayout" name="controlModeGrid">
-         <item row="1" column="0">
-          <widget class="QPushButton" name="rainbowButton">
-           <property name="text">
-            <string>Rainbow</string>
-           </property>
-          </widget>
-         </item>
          <item row="3" column="0">
           <widget class="QPushButton" name="flashButton">
            <property name="text">
@@ -48,10 +41,17 @@
            </property>
           </widget>
          </item>
-         <item row="2" column="0">
-          <widget class="QPushButton" name="strobeButton">
+         <item row="1" column="0">
+          <widget class="QPushButton" name="rainbowButton">
            <property name="text">
-            <string>Strobe</string>
+            <string>Rainbow</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="1">
+          <widget class="QPushButton" name="testButton">
+           <property name="text">
+            <string>Test</string>
            </property>
           </widget>
          </item>
@@ -62,10 +62,10 @@
            </property>
           </widget>
          </item>
-         <item row="3" column="1">
-          <widget class="QPushButton" name="testButton">
+         <item row="2" column="0">
+          <widget class="QPushButton" name="strobeButton">
            <property name="text">
-            <string>Test</string>
+            <string>Strobe</string>
            </property>
           </widget>
          </item>
@@ -180,6 +180,99 @@
          </item>
         </layout>
        </widget>
+       <widget class="QWidget" name="verticalLayoutWidget">
+        <property name="geometry">
+         <rect>
+          <x>930</x>
+          <y>190</y>
+          <width>211</width>
+          <height>181</height>
+         </rect>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_2">
+         <item>
+          <widget class="QLabel" name="colorPickerLabel">
+           <property name="text">
+            <string>Color Picker</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QTextBrowser" name="colorDisplay"/>
+         </item>
+         <item>
+          <layout class="QGridLayout" name="gridLayout">
+           <item row="0" column="0">
+            <widget class="QLabel" name="rSliderLabel">
+             <property name="text">
+              <string> R: </string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QSlider" name="bColorSlider">
+             <property name="maximum">
+              <number>255</number>
+             </property>
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="2">
+            <widget class="QLCDNumber" name="gValueDisplay"/>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="bSliderLabel">
+             <property name="text">
+              <string> B: </string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="2">
+            <widget class="QLCDNumber" name="rValueDisplay"/>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="gSliderLabel">
+             <property name="text">
+              <string> G: </string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QSlider" name="gColorSlider">
+             <property name="maximum">
+              <number>255</number>
+             </property>
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QSlider" name="rColorSlider">
+             <property name="maximum">
+              <number>255</number>
+             </property>
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="2">
+            <widget class="QLCDNumber" name="bValueDisplay"/>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+       <zorder>gridLayoutWidget</zorder>
+       <zorder>gridLayoutWidget_2</zorder>
+       <zorder>controlModeLabel</zorder>
+       <zorder>verticalLayoutWidget</zorder>
       </widget>
       <widget class="QWidget" name="tab_2">
        <attribute name="title">
