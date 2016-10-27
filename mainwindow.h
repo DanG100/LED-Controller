@@ -26,6 +26,20 @@ private slots:
 
     void on_sendField_returnPressed();
 
+    void on_pushButton_clicked();
+
+    void on_chaseButton_clicked();
+
+    void on_flashButton_clicked();
+
+    void on_strobeButton_clicked();
+
+    void on_wipeButton_clicked();
+
+    void on_testButton_clicked();
+
+    void on_rainbowButton_clicked();
+
 public slots:
     void updateUiConnectInfo(QString port, QString baudRate, QString manufacturer, QString description);
     void updatUISent(QString msg);

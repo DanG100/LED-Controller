@@ -59,3 +59,33 @@ void MainWindow::updateUIReceived(QString msg)
 {
     this->ui->logView->append("Arduino: " + msg);
 }
+
+void MainWindow::on_rainbowButton_clicked()
+{
+    this->comm.write("m:0");
+}
+
+void MainWindow::on_chaseButton_clicked()
+{
+    this->comm.write("m:1");
+}
+
+void MainWindow::on_strobeButton_clicked()
+{
+    this->comm.write("m:2");
+}
+void MainWindow::on_wipeButton_clicked()
+{
+    this->comm.write("m:3");
+}
+
+void MainWindow::on_flashButton_clicked()
+{
+    this->comm.write("m:4");
+}
+
+void MainWindow::on_testButton_clicked()
+{
+    this->comm.write("m:5");
+}
+
