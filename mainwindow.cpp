@@ -59,3 +59,62 @@ void MainWindow::updateUIReceived(QString msg)
 {
     this->ui->logView->append("Arduino: " + msg);
 }
+
+void MainWindow::on_rainbowButton_clicked()
+{
+    this->comm.write("m:0");
+}
+
+void MainWindow::on_chaseButton_clicked()
+{
+    this->comm.write("m:1");
+}
+
+void MainWindow::on_strobeButton_clicked()
+{
+    this->comm.write("m:2");
+}
+void MainWindow::on_wipeButton_clicked()
+{
+    this->comm.write("m:3");
+}
+
+void MainWindow::on_flashButton_clicked()
+{
+    this->comm.write("m:4");
+}
+
+void MainWindow::on_testButton_clicked()
+{
+    this->comm.write("m:5");
+}
+
+void MainWindow::updateColor()
+{
+    int r,g,b;
+    r = this->ui->rColorSlider->value();
+    g = this->ui->gColorSlider->value();
+    b = this->ui->bColorSlider->value();
+
+    char background[50];
+    sprintf(background,"background-color:rgba(%d, %d, %d, 0.75);",r,b,g);
+    this->ui->colorDisplay->setStyleSheet(background);
+}
+
+void MainWindow::on_rColorSlider_valueChanged(int value)
+{
+    this->ui->rValueDisplay->display(value);
+    this->updateColor();
+}
+
+void MainWindow::on_gColorSlider_valueChanged(int value)
+{
+    this->ui->gValueDisplay->display(value);
+    this->updateColor();
+}
+
+void MainWindow::on_bColorSlider_valueChanged(int value)
+{
+    this->ui->bValueDisplay->display(value);
+    this->updateColor();
+}

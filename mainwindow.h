@@ -26,6 +26,24 @@ private slots:
 
     void on_sendField_returnPressed();
 
+    void on_chaseButton_clicked();
+
+    void on_flashButton_clicked();
+
+    void on_strobeButton_clicked();
+
+    void on_wipeButton_clicked();
+
+    void on_testButton_clicked();
+
+    void on_rainbowButton_clicked();
+
+    void on_rColorSlider_valueChanged(int value);
+
+    void on_gColorSlider_valueChanged(int value);
+
+    void on_bColorSlider_valueChanged(int value);
+
 public slots:
     void updateUiConnectInfo(QString port, QString baudRate, QString manufacturer, QString description);
     void updatUISent(QString msg);
@@ -33,6 +51,7 @@ public slots:
 private:
     Ui::MainWindow *ui;
     SerialComm comm;
+    void updateColor();
 };
 
 #endif // MAINWINDOW_H
